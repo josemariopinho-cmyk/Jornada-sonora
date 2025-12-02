@@ -4,21 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jornada de Descoberta Sonora - Colégio Helyos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos Gerais */
+        :root {
+            --primary-color: #C41E3A; /* Vermelho Helyos */
+            --text-color: #333;
+            --background-color: #f4f4f4;
+            --light-gray: #eee;
+            --dark-gray: #555;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
             min-height: 100vh;
-            padding-top: 20px;
-            padding-bottom: 20px;
         }
 
         .container {
@@ -27,244 +35,181 @@
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             max-width: 800px;
-            width: 95%;
+            width: 100%;
             box-sizing: border-box;
+            margin-bottom: 20px;
         }
 
-        /* Logo e Títulos */
-        .header {
+        header {
             text-align: center;
             margin-bottom: 30px;
         }
 
-        .logo-placeholder {
-            /* Substitua este div pela tag <img> da sua logo real */
-            /* Exemplo: <img src="caminho/para/sua/logo.png" alt="Colégio Helyos Logo" style="max-width: 150px; margin-bottom: 15px;"> */
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #CC0000; /* Vermelho do Colégio Helyos */
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
         }
 
         h1 {
-            color: #CC0000; /* Vermelho do Colégio Helyos */
+            color: var(--primary-color);
             font-size: 2.2em;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         h2 {
-            color: #555;
-            font-size: 1.2em;
-            font-weight: normal;
-            margin-top: 0;
+            color: var(--dark-gray);
+            font-size: 1.5em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 5px;
         }
 
-        /* Reprodutor de Áudio */
-        .audio-player-container {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
+        p {
+            margin-bottom: 15px;
+        }
+
+        .audio-player-section {
             text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
         }
 
         audio {
             width: 100%;
+            max-width: 500px;
             margin-top: 15px;
-            outline: none;
-        }
-
-        .audio-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 15px;
-        }
-
-        .play-pause-btn {
-            background-color: #CC0000;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5em;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 15px;
-            transition: background-color 0.3s ease;
-        }
-
-        .play-pause-btn:hover {
-            background-color: #A00000;
-        }
-
-        .progress-bar-container {
-            flex-grow: 1;
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background-color: #CC0000;
+            background-color: var(--primary-color);
             border-radius: 5px;
         }
 
-        .time-display {
-            margin-left: 15px;
-            font-size: 0.9em;
-            color: #666;
-            min-width: 70px;
-            text-align: right;
-        }
-
-        /* Formulário de Questões */
-        .question-section {
+        .question-block {
             margin-bottom: 25px;
-            padding: 20px;
-            border: 1px solid #eee;
+            padding: 15px;
+            border: 1px solid var(--light-gray);
             border-radius: 8px;
             background-color: #fdfdfd;
         }
 
-        .question-section p {
+        .question-block p {
             font-weight: bold;
-            margin-bottom: 15px;
-            color: #CC0000;
-            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: var(--primary-color);
         }
 
         .options label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             cursor: pointer;
-            padding: 8px 0;
+            padding: 5px 0;
             transition: background-color 0.2s ease;
         }
 
         .options label:hover {
-            background-color: #f0f0f0;
+            background-color: rgba(var(--primary-color-rgb, 196, 30, 58), 0.05);
+            border-radius: 3px;
         }
 
         .options input[type="radio"],
         .options input[type="checkbox"] {
             margin-right: 10px;
-            transform: scale(1.2);
-            vertical-align: middle;
+            accent-color: var(--primary-color); /* Cor do radio/checkbox */
         }
 
-        /* Botão de Envio */
-        .submit-btn {
-            background-color: #CC0000;
-            color: white;
-            padding: 15px 25px;
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            background-color: var(--primary-color);
+            color: #fff;
             border: none;
             border-radius: 8px;
             font-size: 1.1em;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .submit-btn:hover {
-            background-color: #A00000;
-        }
-
-        /* Mensagem de Sucesso */
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 30px;
-            background-color: #e6ffe6;
-            border: 1px solid #aaffaa;
-            border-radius: 8px;
-            color: #008000;
-            font-size: 1.3em;
             font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
             margin-top: 30px;
+        }
+
+        .submit-button:hover {
+            background-color: #a81a30; /* Tom mais escuro do vermelho */
+            transform: translateY(-2px);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        #successMessage {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e6ffe6; /* Verde claro */
+            color: #006600; /* Verde escuro */
+            border: 1px solid #00cc00;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+            color: var(--dark-gray);
+            font-size: 0.9em;
         }
 
         /* Responsividade */
         @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
             .container {
                 padding: 20px;
             }
-
             h1 {
                 font-size: 1.8em;
             }
-
             h2 {
+                font-size: 1.3em;
+            }
+            .logo {
+                max-width: 150px;
+            }
+            .submit-button {
+                padding: 12px 15px;
                 font-size: 1em;
-            }
-
-            .logo-placeholder {
-                font-size: 2em;
-            }
-
-            .play-pause-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2em;
-            }
-
-            .audio-controls {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .progress-bar-container {
-                width: 100%;
-                margin-top: 15px;
-            }
-
-            .time-display {
-                margin-left: 0;
-                margin-top: 10px;
-                width: 100%;
-                text-align: center;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <!-- LOGO DO COLÉGIO HELYOS -->
-            <!-- Substitua este div pela tag <img> da sua logo real, se tiver o arquivo. -->
-            <!-- Exemplo: <img src="caminho/para/sua/logo.png" alt="Colégio Helyos Logo" style="max-width: 150px; margin-bottom: 15px;"> -->
-            <div class="logo-placeholder">Colégio Helyos</div>
+        <header>
+            <img src="https://raw.githubusercontent.com/josemariopinho-cmyk/Jornada-sonora/main/logo-helyos.png" alt="Logo Colégio Helyos" class="logo">
             <h1>Jornada de Descoberta Sonora</h1>
-            <h2>Exercício de Percepção Auditiva - 5º e 6º Ano</h2>
-        </div>
+            <p>Colégio Helyos - Exercício de Percepção Auditiva</p>
+        </header>
 
-        <div class="audio-player-container">
-            <p>🎧 Clique no botão Play para iniciar a experiência sonora.</p>
-            <audio id="audioPlayer" src="https://drive.google.com/uc?export=download&id=1qIrd-hQ1A70jc4bL9GeaaVeSHsYZWaYC"></audio>
-            
-            <div class="audio-controls">
-                <button id="playPauseBtn" class="play-pause-btn">▶</button>
-                <div class="progress-bar-container" id="progressBarContainer">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-                <div class="time-display" id="timeDisplay">00:00 / 00:00</div>
-            </div>
-        </div>
+        <section class="audio-player-section">
+            <h2>Ouça o Áudio com Atenção</h2>
+            <p>Pressione o botão "Play" e mergulhe na experiência sonora.</p>
+            <audio controls>
+                <source src="https://raw.githubusercontent.com/josemariopinho-cmyk/Jornada-sonora/main/jornada-sonora.mp3" type="audio/mpeg">
+                Seu navegador não suporta o elemento de áudio.
+            </audio>
+        </section>
 
         <form id="quizForm">
-            <!-- Questão 1 -->
-            <div class="question-section">
+            <h2>Responda às Questões</h2>
+
+            <div class="question-block">
                 <p>1. Qual é o ambiente principal que você ouviu?</p>
                 <div class="options">
                     <label><input type="radio" name="q1" value="a"> A) Estação de trem</label>
@@ -274,68 +219,62 @@
                 </div>
             </div>
 
-            <!-- Questão 2 -->
-            <div class="question-section">
-                <p>2. Quais sons você conseguiu IDENTIFICAR? (Marque todas as opções corretas)</p>
+            <div class="question-block">
+                <p>2. Qual destas descrições melhor representa o ambiente que você imaginou?</p>
                 <div class="options">
-                    <label><input type="checkbox" name="q2" value="a"> A) Multidão murmurando</label>
-                    <label><input type="checkbox" name="q2" value="b"> B) Passos de pessoas</label>
-                    <label><input type="checkbox" name="q2" value="c"> C) Porta automática</label>
-                    <label><input type="checkbox" name="q2" value="d"> D) Avião decolando</label>
-                    <label><input type="checkbox" name="q2" value="e"> E) Vozes conversando</label>
-                    <label><input type="checkbox" name="q2" value="f"> F) Sino de elevador</label>
-                    <label><input type="checkbox" name="q2" value="g"> G) Música de fundo</label>
-                    <label><input type="checkbox" name="q2" value="h"> H) Alarme</label>
-                    <label><input type="checkbox" name="q2" value="i"> I) Roda de mala</label>
+                    <label><input type="radio" name="q2" value="a"> A) Um lugar calmo e silencioso</label>
+                    <label><input type="radio" name="q2" value="b"> B) Um lugar barulhento com muitas pessoas movimentadas</label>
+                    <label><input type="radio" name="q2" value="c"> C) Um lugar com música alta</label>
+                    <label><input type="radio" name="q2" value="d"> D) Um lugar vazio e deserto</label>
                 </div>
             </div>
 
-            <!-- Questão 3 -->
-            <div class="question-section">
-                <p>3. Qual som você ouviu como o MAIS ALTO/FORTE?</p>
+            <div class="question-block">
+                <p>3. Quais sons você conseguiu IDENTIFICAR? (Marque todas as opções corretas)</p>
                 <div class="options">
-                    <label><input type="radio" name="q3" value="a"> A) Multidão murmurando</label>
-                    <label><input type="radio" name="q3" value="b"> B) Passos de pessoas</label>
-                    <label><input type="radio" name="q3" value="c"> C) Avião decolando</label>
-                    <label><input type="radio" name="q3" value="d"> D) Vozes conversando</label>
+                    <label><input type="checkbox" name="q3" value="a"> A) Multidão murmurando</label>
+                    <label><input type="checkbox" name="q3" value="b"> B) Passos de pessoas</label>
+                    <label><input type="checkbox" name="q3" value="c"> C) Porta automática</label>
+                    <label><input type="checkbox" name="q3" value="d"> D) Avião decolando</label>
+                    <label><input type="checkbox" name="q3" value="e"> E) Vozes conversando</label>
+                    <label><input type="checkbox" name="q3" value="f"> F) Sino de elevador</label>
+                    <label><input type="checkbox" name="q3" value="g"> G) Música de fundo</label>
+                    <label><input type="checkbox" name="q3" value="h"> H) Alarme</label>
+                    <label><input type="checkbox" name="q3" value="i"> I) Roda de mala</label>
                 </div>
             </div>
 
-            <!-- Questão 4 -->
-            <div class="question-section">
-                <p>4. Qual som você ouviu como o MAIS BAIXO/SUAVE?</p>
+            <div class="question-block">
+                <p>4. Qual som você ouviu como o MAIS ALTO/FORTE?</p>
                 <div class="options">
-                    <label><input type="radio" name="q4" value="a"> A) Avião decolando</label>
-                    <label><input type="radio" name="q4" value="b"> B) Multidão murmurando</label>
-                    <label><input type="radio" name="q4" value="c"> C) Porta automática</label>
-                    <label><input type="radio" name="q4" value="d"> D) Sino de elevador</label>
+                    <label><input type="radio" name="q4" value="a"> A) Multidão murmurando</label>
+                    <label><input type="radio" name="q4" value="b"> B) Passos de pessoas</label>
+                    <label><input type="radio" name="q4" value="c"> C) Avião decolando</label>
+                    <label><input type="radio" name="q4" value="d"> D) Vozes conversando</label>
                 </div>
             </div>
 
-            <!-- Questão 5 -->
-            <div class="question-section">
-                <p>5. Por que você acha que o AVIÃO foi ouvido mais FORTE no FINAL do áudio?</p>
+            <div class="question-block">
+                <p>5. Qual som você ouviu como o MAIS BAIXO/SUAVE?</p>
                 <div class="options">
-                    <label><input type="radio" name="q5" value="a"> A) Porque estava se afastando</label>
-                    <label><input type="radio" name="q5" value="b"> B) Porque estava se aproximando</label>
-                    <label><input type="radio" name="q5" value="c"> C) Porque era o único som importante</label>
-                    <label><input type="radio" name="q5" value="d"> D) Não há motivo específico</label>
+                    <label><input type="radio" name="q5" value="a"> A) Avião decolando</label>
+                    <label><input type="radio" name="q5" value="b"> B) Multidão murmurando</label>
+                    <label><input type="radio" name="q5" value="c"> C) Porta automática</label>
+                    <label><input type="radio" name="q5" value="d"> D) Sino de elevador</label>
                 </div>
             </div>
 
-            <!-- Questão 6 -->
-            <div class="question-section">
-                <p>6. Qual destas descrições melhor representa o ambiente que você imaginou?</p>
+            <div class="question-block">
+                <p>6. Por que você acha que o AVIÃO foi ouvido mais FORTE no FINAL do áudio?</p>
                 <div class="options">
-                    <label><input type="radio" name="q6" value="a"> A) Um lugar calmo e silencioso</label>
-                    <label><input type="radio" name="q6" value="b"> B) Um lugar barulhento com muitas pessoas movimentadas</label>
-                    <label><input type="radio" name="q6" value="c"> C) Um lugar com música alta e dança</label>
-                    <label><input type="radio" name="q6" value="d"> D) Um lugar vazio e deserto</label>
+                    <label><input type="radio" name="q6" value="a"> A) Porque estava se afastando</label>
+                    <label><input type="radio" name="q6" value="b"> B) Porque estava se aproximando</label>
+                    <label><input type="radio" name="q6" value="c"> C) Porque era o único som importante</label>
+                    <label><input type="radio" name="q6" value="d"> D) Não há motivo específico</label>
                 </div>
             </div>
 
-            <!-- Questão 7 -->
-            <div class="question-section">
+            <div class="question-block">
                 <p>7. Se o áudio continuasse, qual som você SUPÕE que ouviria em seguida?</p>
                 <div class="options">
                     <label><input type="radio" name="q7" value="a"> A) O avião pousando</label>
@@ -345,108 +284,40 @@
                 </div>
             </div>
 
-            <button type="submit" class="submit-btn">Enviar Respostas</button>
+            <button type="submit" class="submit-button">Enviar Respostas</button>
         </form>
 
-        <div id="successMessage" class="success-message">
-            ✅ Respostas enviadas com sucesso! Obrigado por participar da Jornada Sonora!
+        <div id="successMessage">
+            Respostas enviadas com sucesso! Obrigado por participar da Jornada Sonora.
         </div>
     </div>
 
+    <footer>
+        &copy; 2024 Colégio Helyos. Todos os direitos reservados.
+    </footer>
+
     <script>
-        const audioPlayer = document.getElementById('audioPlayer');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const progressBar = document.getElementById('progressBar');
-        const progressBarContainer = document.getElementById('progressBarContainer');
-        const timeDisplay = document.getElementById('timeDisplay');
-        const quizForm = document.getElementById('quizForm');
-        const successMessage = document.getElementById('successMessage');
+        document.getElementById('quizForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
 
-        // --- Audio Player Controls ---
-        playPauseBtn.addEventListener('click', () => {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-                playPauseBtn.textContent = '⏸';
-            } else {
-                audioPlayer.pause();
-                playPauseBtn.textContent = '▶';
-            }
-        });
+            // Aqui você pode adicionar lógica para coletar as respostas
+            // e enviá-las para um servidor, se necessário.
+            // Por enquanto, apenas exibiremos a mensagem de sucesso.
 
-        audioPlayer.addEventListener('timeupdate', () => {
-            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-            progressBar.style.width = progress + '%';
-            updateTimeDisplay();
-        });
+            // Exemplo de como coletar uma resposta de rádio:
+            // const q1Answer = document.querySelector('input[name="q1"]:checked');
+            // if (q1Answer) {
+            //     console.log('Resposta Q1:', q1Answer.value);
+            // }
 
-        audioPlayer.addEventListener('loadedmetadata', () => {
-            updateTimeDisplay();
-        });
+            // Exemplo de como coletar respostas de checkbox:
+            // const q3Answers = document.querySelectorAll('input[name="q3"]:checked');
+            // const q3Values = Array.from(q3Answers).map(cb => cb.value);
+            // console.log('Respostas Q3:', q3Values);
 
-        audioPlayer.addEventListener('ended', () => {
-            playPauseBtn.textContent = '▶';
-            audioPlayer.currentTime = 0; // Reset to beginning
-            progressBar.style.width = '0%';
-            updateTimeDisplay();
-        });
-
-        progressBarContainer.addEventListener('click', (e) => {
-            const clickX = e.offsetX;
-            const width = progressBarContainer.offsetWidth;
-            const duration = audioPlayer.duration;
-            audioPlayer.currentTime = (clickX / width) * duration;
-        });
-
-        function formatTime(seconds) {
-            const min = Math.floor(seconds / 60);
-            const sec = Math.floor(seconds % 60);
-            return `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
-        }
-
-        function updateTimeDisplay() {
-            const current = formatTime(audioPlayer.currentTime);
-            const total = formatTime(audioPlayer.duration);
-            timeDisplay.textContent = `${current} / ${total}`;
-        }
-
-        // --- Form Submission and Validation ---
-        quizForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
-
-            let allQuestionsAnswered = true;
-            const answers = {};
-
-            // Validate and collect answers for radio buttons
-            for (let i = 1; i <= 7; i++) {
-                if (i === 2) { // Special handling for checkbox question (Q2)
-                    const checkboxes = document.querySelectorAll(`input[name="q${i}"]:checked`);
-                    if (checkboxes.length === 0) {
-                        allQuestionsAnswered = false;
-                        break;
-                    }
-                    answers[`q${i}`] = Array.from(checkboxes).map(cb => cb.value);
-                } else {
-                    const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
-                    if (!selectedOption) {
-                        allQuestionsAnswered = false;
-                        break;
-                    }
-                    answers[`q${i}`] = selectedOption.value;
-                }
-            }
-
-            if (!allQuestionsAnswered) {
-                alert('Por favor, responda a todas as perguntas antes de enviar.');
-                return;
-            }
-
-            // If all questions are answered, simulate submission
-            console.log('Respostas do aluno:', answers); // Log answers to console for review
-            quizForm.style.display = 'none'; // Hide the form
-            successMessage.style.display = 'block'; // Show success message
-
-            // Optionally, you could send 'answers' to a server here using fetch() or XMLHttpRequest
-            // For this self-contained page, we just log to console and show success.
+            document.getElementById('quizForm').style.display = 'none'; // Esconde o formulário
+            document.getElementById('successMessage').style.display = 'block'; // Mostra a mensagem de sucesso
+            window.scrollTo(0, 0); // Rola para o topo da página para ver a mensagem
         });
     </script>
 </body>
