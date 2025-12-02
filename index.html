@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada de Descoberta Sonora - Colégio Helyos</title>
+    <style>
+        /* Variáveis CSS */
+        :root {
+            --primary-color: #DC143C; /* Vermelho principal */
+            --secondary-color: #E74C3C; /* Vermelho secundário para hover */
+            --text-color: #333;
+            --background-color: #f4f4f4;
+            --white-color: #fff;
+            --border-color: #ddd;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos Gerais */
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: var(--white-color);
+            margin: 20px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Cabeçalho */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header img {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .header h2 {
+            color: var(--text-color);
+            font-size: 1.2em;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        /* Seção de Instruções */
+        .instructions {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .instructions p {
+            margin: 0 0 10px 0;
+        }
+
+        .instructions ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin: 10px 0 0 0;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        /* Reprodutor de Áudio Customizado */
+        .audio-player-container {
+            background-color: #eee;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 15px;
+        }
+
+        .play-pause-btn {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            flex-shrink: 0;
+        }
+
+        .play-pause-btn:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .play-pause-btn:active {
+            transform: scale(0.98);
+        }
+
+        .progress-bar-container {
+            flex-grow: 1;
+            height: 10px;
+            background-color: #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .time-display {
+            font-size: 0.9em;
+            color: var(--text-color);
+            width: 80px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* Formulário de Questões */
+        .question-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--white-color);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+
+        .question-section h3 {
+            color: var(--primary-color);
+            font-size: 1.3em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .question-section p {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .option-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .option-item input[type="radio"],
+        .option-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: var(--primary-color); /* Cor do radio/checkbox */
+        }
+
+        .option-item label {
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        /* Botão de Enviar */
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0 auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Mensagem de Sucesso */
+        #successMessage {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header h2 {
+                font-size: 1em;
+            }
+
+            .play-pause-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.8em;
+            }
+
+            .audio-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .progress-bar-container {
+                width: calc(100% - 120px); /* Ajusta para caber botões e tempo */
+            }
+
+            .time-display {
+                order: 3; /* Move para baixo em telas pequenas */
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <!-- Logo do Colégio Helyos (Base64 placeholder) -->
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iODAiIGZpbGw9IiNEQzE0M0MiLz4KICA8dGV4dCB4PSIxMDAiIHk9IjQ1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSI+Q29sw6lnaW8gSGVseW9zPC90ZXh0Pgo8L3N2Zz4=" alt="Logo Colégio Helyos">
+            <h1>🎧 Jornada de Descoberta Sonora</h1>
+            <h2>Exercício de Percepção Auditiva</h2>
+        </header>
+
+        <section class="instructions">
+            <p>Bem-vindo(a) à Jornada de Descoberta Sonora do Colégio Helyos!</p>
+            <p>Este exercício foi desenvolvido para treinar sua percepção auditiva e sensibilidade aos sons do ambiente.</p>
+            <ul>
+                <li><strong>Duração estimada:</strong> 5-7 minutos</li>
+                <li><strong>Necessário:</strong> Fones de ouvido para uma melhor experiência</li>
+            </ul>
+            <p><strong>Instruções:</strong></p>
+            <ol>
+                <li>Clique no botão PLAY abaixo para iniciar o áudio.</li>
+                <li>Escute com atenção, preferencialmente com os olhos fechados, para uma imersão completa.</li>
+                <li>Após ouvir o áudio, responda as questões abaixo.</li>
+            </ol>
+            <p style="text-align: center; font-weight: bold; color: var(--primary-color);">BOA ESCUTA! 🎧</p>
+        </section>
+
+        <section class="audio-player-container">
+            <audio id="audioPlayer" src="https://drive.google.com/file/d/1qIrd-hQ1A70jc4bL9GeaaVeSHsYZWaYC/preview"></audio>
+            <div class="audio-controls">
+                <button id="playPauseBtn" class="play-pause-btn">▶</button>
+                <div class="progress-bar-container" id="progressBarContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+            </div>
+        </section>
+
+        <form id="quizForm">
+            <div class="question-section">
+                <h3>Questão 1</h3>
+                <p>Qual é o ambiente principal que você ouviu?</p>
+                <div class="options-group">
+                    <div class="option-item">
+                        <input type="radio" id="q1_a" name="q1" value="a" required>
+                        <label for="q1_a">A) Estação de trem</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q1_b" name="q1" value="b" required>
+                        <label for="q1_b">B) Aeroporto</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q1_c" name="q1" value="c" required>
+                        <label for="q1_c">C) Supermercado</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q1_d" name="q1" value="d" required>
+                        <label for="q1_d">D) Praia</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>Questão 2</h3>
+                <p>Qual destas descrições melhor representa o ambiente que você imaginou?</p>
+                <div class="options-group">
+                    <div class="option-item">
+                        <input type="radio" id="q2_a" name="q2" value="a" required>
+                        <label for="q2_a">A) Um lugar calmo e silencioso</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q2_b" name="q2" value="b" required>
+                        <label for="q2_b">B) Um lugar barulhento com muitas pessoas movimentadas</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q2_c" name="q2" value="c" required>
+                        <label for="q2_c">C) Um lugar com música alta</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q2_d" name="q2" value="d" required>
+                        <label for="q2_d">D) Um lugar vazio e deserto</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>Questão 3</h3>
+                <p>Quais sons você conseguiu IDENTIFICAR? (Marque TODAS que ouviu)</p>
+                <div class="options-group">
+                    <div class="option-item">
+                        <input type="checkbox" id="q3_a" name="q3" value="a">
+                        <label for="q3_a">A) Multidão murmurando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="q3_b" name="q3" value="b">
+                        <label for="q3_b">B) Passos de pessoas</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="q3_c" name="q3" value="c">
+                        <label for="q3_c">C) Porta automática</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="q3_d" name="q3" value="d">
+                        <label for="q3_d">D) Avião decolando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="q3_e" name="q3" value="e">
+                        <label for="q3_e">E) Vozes conversando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="q3_f" name="q3" value="f">
+                        <label for="q3_f">F) Sino de elevador</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="q3_g" name="q3" value="g">
+                        <label for="q3_g">G) Música de fundo</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="q3_h" name="q3" value="h">
+                        <label for="q3_h">H) Alarme</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="q3_i" name="q3" value="i">
+                        <label for="q3_i">I) Roda de mala</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>Questão 4</h3>
+                <p>Qual som você ouviu como o MAIS ALTO/FORTE?</p>
+                <div class="options-group">
+                    <div class="option-item">
+                        <input type="radio" id="q4_a" name="q4" value="a" required>
+                        <label for="q4_a">A) Multidão murmurando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q4_b" name="q4" value="b" required>
+                        <label for="q4_b">B) Passos de pessoas</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q4_c" name="q4" value="c" required>
+                        <label for="q4_c">C) Avião decolando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q4_d" name="q4" value="d" required>
+                        <label for="q4_d">D) Vozes conversando</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>Questão 5</h3>
+                <p>Qual som você ouviu como o MAIS BAIXO/SUAVE?</p>
+                <div class="options-group">
+                    <div class="option-item">
+                        <input type="radio" id="q5_a" name="q5" value="a" required>
+                        <label for="q5_a">A) Avião decolando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q5_b" name="q5" value="b" required>
+                        <label for="q5_b">B) Multidão murmurando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q5_c" name="q5" value="c" required>
+                        <label for="q5_c">C) Porta automática</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q5_d" name="q5" value="d" required>
+                        <label for="q5_d">D) Sino de elevador</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>Questão 6</h3>
+                <p>Por que você acha que o AVIÃO foi ouvido mais FORTE no FINAL do áudio?</p>
+                <div class="options-group">
+                    <div class="option-item">
+                        <input type="radio" id="q6_a" name="q6" value="a" required>
+                        <label for="q6_a">A) Porque estava se afastando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q6_b" name="q6" value="b" required>
+                        <label for="q6_b">B) Porque estava se aproximando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q6_c" name="q6" value="c" required>
+                        <label for="q6_c">C) Porque era o único som importante</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q6_d" name="q6" value="d" required>
+                        <label for="q6_d">D) Não há motivo específico</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <h3>Questão 7</h3>
+                <p>Se o áudio continuasse, qual som você SUPÕE que ouviria em seguida?</p>
+                <div class="options-group">
+                    <div class="option-item">
+                        <input type="radio" id="q7_a" name="q7" value="a" required>
+                        <label for="q7_a">A) O avião pousando</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q7_b" name="q7" value="b" required>
+                        <label for="q7_b">B) Pessoas descendo do avião</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q7_c" name="q7" value="c" required>
+                        <label for="q7_c">C) Sons de bagagens sendo retiradas</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="q7_d" name="q7" value="d" required>
+                        <label for="q7_d">D) Todas as alternativas acima</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">ENVIAR RESPOSTAS</button>
+            <div id="successMessage"></div>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript para o reprodutor de áudio
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressBarContainer = document.getElementById('progressBarContainer');
+        const timeDisplay = document.getElementById('timeDisplay');
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseBtn.textContent = '⏸';
+            } else {
+                audioPlayer.pause();
+                playPauseBtn.textContent = '▶';
+            }
+        });
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+            timeDisplay.textContent = `${formatTime(audioPlayer.currentTime)} / ${formatTime(audioPlayer.duration)}`;
+        });
+
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            timeDisplay.textContent = `0:00 / ${formatTime(audioPlayer.duration)}`;
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            playPauseBtn.textContent = '▶';
+            audioPlayer.currentTime = 0; // Reseta para o início
+        });
+
+        progressBarContainer.addEventListener('click', (e) => {
+            const clickX = e.offsetX;
+            const width = progressBarContainer.offsetWidth;
+            const percent = (clickX / width);
+            audioPlayer.currentTime = audioPlayer.duration * percent;
+        });
+
+        // JavaScript para validação do formulário
+        const quizForm = document.getElementById('quizForm');
+        const successMessage = document.getElementById('successMessage');
+
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Impede o envio padrão do formulário
+
+            let allQuestionsAnswered = true;
+
+            // Validação para questões de rádio (múltipla escolha)
+            const radioQuestions = ['q1', 'q2', 'q4', 'q5', 'q6', 'q7'];
+            radioQuestions.forEach(qName => {
+                const radios = document.querySelectorAll(`input[name="${qName}"]`);
+                const isAnswered = Array.from(radios).some(radio => radio.checked);
+                if (!isAnswered) {
+                    allQuestionsAnswered = false;
+                }
+            });
+
+            // Validação para questão de checkbox (múltiplas seleções - Q3)
+            const checkboxesQ3 = document.querySelectorAll('input[name="q3"]');
+            const isQ3Answered = Array.from(checkboxesQ3).some(checkbox => checkbox.checked);
+            if (!isQ3Answered) {
+                allQuestionsAnswered = false;
+            }
+
+            if (allQuestionsAnswered) {
+                successMessage.style.display = 'block';
+                successMessage.textContent = 'Respostas enviadas com sucesso! Obrigado por participar da Jornada Sonora.';
+                quizForm.reset(); // Limpa o formulário
+                // Opcional: desabilitar o botão de enviar ou redirecionar
+                // quizForm.querySelector('.submit-btn').disabled = true;
+            } else {
+                successMessage.style.display = 'block';
+                successMessage.style.backgroundColor = '#f8d7da';
+                successMessage.style.color = '#721c24';
+                successMessage.style.borderColor = '#f5c6cb';
+                successMessage.textContent = 'Por favor, responda a todas as questões antes de enviar.';
+            }
+        });
+    </script>
+</body>
+</html>
