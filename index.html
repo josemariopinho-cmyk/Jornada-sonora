@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Exercício de percepção auditiva 'Jornada de Descoberta Sonora' para alunos do Colégio Helyos.">
     <title>Jornada de Descoberta Sonora - Colégio Helyos</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Variáveis de Cores */
         :root {
-            --primary-color: #C41E3A; /* Vermelho Helyos */
-            --text-color: #333;
-            --background-color: #f4f4f4;
-            --light-gray: #eee;
-            --dark-gray: #555;
+            --primary-color: #E43030; /* Vermelho Helyos */
+            --secondary-color: #333333; /* Cinza escuro para texto */
+            --background-color: #FFFFFF; /* Branco */
+            --light-gray: #EEEEEE;
+            --dark-red: #C02828;
         }
 
+        /* Reset Básico e Estilos Globais */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: var(--background-color);
-            color: var(--text-color);
+            color: var(--secondary-color);
             line-height: 1.6;
             display: flex;
             flex-direction: column;
@@ -30,161 +30,302 @@
         }
 
         .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
             width: 100%;
+            max-width: 800px;
+            padding: 20px;
             box-sizing: border-box;
-            margin-bottom: 20px;
+            text-align: center;
         }
 
+        /* Header - Logo, Título e Descrição */
         header {
-            text-align: center;
             margin-bottom: 30px;
         }
 
         .logo {
-            max-width: 200px;
-            height: auto;
-            margin-bottom: 20px;
+            height: 200px; /* Tamanho da logo */
+            display: block;
+            margin: 0 auto 20px auto; /* Centraliza e adiciona margem inferior */
+            max-width: 100%; /* Garante que a logo não ultrapasse o container */
         }
 
         h1 {
             color: var(--primary-color);
-            font-size: 2.2em;
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
 
         h2 {
-            color: var(--dark-gray);
+            color: var(--primary-color);
             font-size: 1.5em;
-            margin-top: 25px;
             margin-bottom: 15px;
-            border-bottom: 2px solid var(--light-gray);
-            padding-bottom: 5px;
         }
 
         p {
-            margin-bottom: 15px;
+            font-size: 1.1em;
+            margin-bottom: 20px;
         }
 
-        .audio-player-section {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: var(--light-gray);
-            border-radius: 8px;
-        }
-
-        audio {
+        /* Seção do Reprodutor de Áudio */
+        .audio-player-container {
             width: 100%;
-            max-width: 500px;
-            margin-top: 15px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 15px;
+            flex-wrap: wrap; /* Permite que os controles quebrem a linha em telas pequenas */
+            justify-content: center;
+        }
+
+        #playPauseBtn {
             background-color: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0; /* Não encolhe o botão */
+        }
+
+        #playPauseBtn.play::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-40%, -50%);
+            border-left: 15px solid var(--background-color);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+        #playPauseBtn.pause::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 15px;
+            height: 20px;
+            background-color: var(--background-color);
+            border-left: 5px solid var(--background-color);
+            border-right: 5px solid var(--background-color);
+        }
+
+        .progress-container {
+            flex-grow: 1; /* Ocupa o espaço disponível */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 180px; /* Garante um tamanho mínimo */
+        }
+
+        #progressBar {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            background: var(--primary-color);
             border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #progressBar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--dark-red);
+            cursor: pointer;
+        }
+
+        #progressBar::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--dark-red);
+            cursor: pointer;
+        }
+
+        .time-display {
+            font-size: 0.9em;
+            white-space: nowrap; /* Evita quebra de linha */
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .volume-container::before {
+            content: '🔊'; /* Ícone de volume */
+            font-size: 1.2em;
+        }
+
+        #volumeBar {
+            width: 80px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: var(--primary-color);
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #volumeBar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--dark-red);
+            cursor: pointer;
+        }
+
+        #volumeBar::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--dark-red);
+            cursor: pointer;
+        }
+
+        /* Seção de Questões */
+        .questions-section {
+            text-align: left;
+            margin-bottom: 30px;
         }
 
         .question-block {
-            margin-bottom: 25px;
-            padding: 15px;
-            border: 1px solid var(--light-gray);
+            background-color: var(--light-gray);
             border-radius: 8px;
-            background-color: #fdfdfd;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        .question-block p {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--primary-color);
+        .question-block h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
         }
 
         .options label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             cursor: pointer;
-            padding: 5px 0;
+            font-size: 1.1em;
+            padding: 8px;
+            border-radius: 5px;
             transition: background-color 0.2s ease;
         }
 
         .options label:hover {
-            background-color: rgba(var(--primary-color-rgb, 196, 30, 58), 0.05);
-            border-radius: 3px;
+            background-color: rgba(var(--primary-color), 0.1);
         }
 
         .options input[type="radio"],
         .options input[type="checkbox"] {
             margin-right: 10px;
-            accent-color: var(--primary-color); /* Cor do radio/checkbox */
+            transform: scale(1.2); /* Aumenta o tamanho do radio/checkbox */
+            vertical-align: middle;
         }
 
-        .submit-button {
-            display: block;
-            width: 100%;
-            padding: 15px 20px;
+        /* Botão de Enviar */
+        #submitBtn {
             background-color: var(--primary-color);
-            color: #fff;
+            color: var(--background-color);
             border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
             border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            margin-top: 30px;
-        }
-
-        .submit-button:hover {
-            background-color: #a81a30; /* Tom mais escuro do vermelho */
-            transform: translateY(-2px);
-        }
-
-        .submit-button:active {
-            transform: translateY(0);
-        }
-
-        #successMessage {
-            display: none;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 300px;
             margin-top: 20px;
-            padding: 20px;
-            background-color: #e6ffe6; /* Verde claro */
-            color: #006600; /* Verde escuro */
-            border: 1px solid #00cc00;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.1em;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--light-gray);
-            color: var(--dark-gray);
-            font-size: 0.9em;
+        #submitBtn:hover {
+            background-color: var(--dark-red);
+        }
+
+        #submitBtn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        /* Mensagem de Sucesso */
+        #successMessage {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: none; /* Escondido por padrão */
+        }
+
+        #errorMessage {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 1em;
+            display: none; /* Escondido por padrão */
         }
 
         /* Responsividade */
         @media (max-width: 600px) {
-            body {
-                padding: 15px;
-            }
-            .container {
-                padding: 20px;
-            }
             h1 {
                 font-size: 1.8em;
             }
             h2 {
-                font-size: 1.3em;
+                font-size: 1.2em;
+            }
+            p {
+                font-size: 1em;
             }
             .logo {
-                max-width: 150px;
+                height: 150px;
             }
-            .submit-button {
-                padding: 12px 15px;
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .progress-container {
+                width: 100%;
+                min-width: unset;
+            }
+            .volume-container {
+                width: 100%;
+                justify-content: center;
+            }
+            #volumeBar {
+                width: 150px;
+            }
+            #submitBtn {
                 font-size: 1em;
+                padding: 12px 25px;
             }
         }
     </style>
@@ -192,132 +333,270 @@
 <body>
     <div class="container">
         <header>
-            <img src="https://raw.githubusercontent.com/josemariopinho-cmyk/Jornada-sonora/main/logo-helyos.png" alt="Logo Colégio Helyos" class="logo">
+            <img src="https://raw.githubusercontent.com/josemariopinho-cmyk/Jornada-sonora/main/LOGOMARCA-HELYOS.png" alt="Logo Colégio Helyos" class="logo">
             <h1>Jornada de Descoberta Sonora</h1>
-            <p>Colégio Helyos - Exercício de Percepção Auditiva</p>
+            <h2>Exercício de Percepção Auditiva</h2>
+            <p>Ouça com atenção o áudio e responda as questões abaixo</p>
         </header>
 
-        <section class="audio-player-section">
-            <h2>Ouça o Áudio com Atenção</h2>
-            <p>Pressione o botão "Play" e mergulhe na experiência sonora.</p>
-            <audio controls>
-                <source src="https://raw.githubusercontent.com/josemariopinho-cmyk/Jornada-sonora/main/jornada-sonora.mp3" type="audio/mpeg">
-                Seu navegador não suporta o elemento de áudio.
-            </audio>
-        </section>
-
-        <form id="quizForm">
-            <h2>Responda às Questões</h2>
-
-            <div class="question-block">
-                <p>1. Qual é o ambiente principal que você ouviu?</p>
-                <div class="options">
-                    <label><input type="radio" name="q1" value="a"> A) Estação de trem</label>
-                    <label><input type="radio" name="q1" value="b"> B) Aeroporto</label>
-                    <label><input type="radio" name="q1" value="c"> C) Supermercado</label>
-                    <label><input type="radio" name="q1" value="d"> D) Praia</label>
+        <main>
+            <!-- Reprodutor de Áudio Personalizado -->
+            <section class="audio-player-container">
+                <audio id="audioPlayer" src="https://raw.githubusercontent.com/josemariopinho-cmyk/Jornada-sonora/main/jornada-sonora.mp3"></audio>
+                <div class="controls">
+                    <button id="playPauseBtn" class="play"></button>
+                    <div class="progress-container">
+                        <input type="range" id="progressBar" value="0" min="0" max="100">
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                        </div>
+                    </div>
+                    <div class="volume-container">
+                        <input type="range" id="volumeBar" value="100" min="0" max="100">
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="question-block">
-                <p>2. Qual destas descrições melhor representa o ambiente que você imaginou?</p>
-                <div class="options">
-                    <label><input type="radio" name="q2" value="a"> A) Um lugar calmo e silencioso</label>
-                    <label><input type="radio" name="q2" value="b"> B) Um lugar barulhento com muitas pessoas movimentadas</label>
-                    <label><input type="radio" name="q2" value="c"> C) Um lugar com música alta</label>
-                    <label><input type="radio" name="q2" value="d"> D) Um lugar vazio e deserto</label>
-                </div>
-            </div>
+            <!-- Seção de Questões -->
+            <section class="questions-section">
+                <form id="quizForm">
+                    <!-- Questão 1 -->
+                    <div class="question-block">
+                        <h3>1. Qual é o ambiente principal que você ouviu?</h3>
+                        <div class="options">
+                            <label><input type="radio" name="q1" value="A"> A) Estação de trem</label>
+                            <label><input type="radio" name="q1" value="B"> B) Aeroporto</label>
+                            <label><input type="radio" name="q1" value="C"> C) Supermercado</label>
+                            <label><input type="radio" name="q1" value="D"> D) Praia</label>
+                        </div>
+                    </div>
 
-            <div class="question-block">
-                <p>3. Quais sons você conseguiu IDENTIFICAR? (Marque todas as opções corretas)</p>
-                <div class="options">
-                    <label><input type="checkbox" name="q3" value="a"> A) Multidão murmurando</label>
-                    <label><input type="checkbox" name="q3" value="b"> B) Passos de pessoas</label>
-                    <label><input type="checkbox" name="q3" value="c"> C) Porta automática</label>
-                    <label><input type="checkbox" name="q3" value="d"> D) Avião decolando</label>
-                    <label><input type="checkbox" name="q3" value="e"> E) Vozes conversando</label>
-                    <label><input type="checkbox" name="q3" value="f"> F) Sino de elevador</label>
-                    <label><input type="checkbox" name="q3" value="g"> G) Música de fundo</label>
-                    <label><input type="checkbox" name="q3" value="h"> H) Alarme</label>
-                    <label><input type="checkbox" name="q3" value="i"> I) Roda de mala</label>
-                </div>
-            </div>
+                    <!-- Questão 2 -->
+                    <div class="question-block">
+                        <h3>2. Qual destas descrições melhor representa o ambiente que você imaginou?</h3>
+                        <div class="options">
+                            <label><input type="radio" name="q2" value="A"> A) Um lugar calmo e silencioso</label>
+                            <label><input type="radio" name="q2" value="B"> B) Um lugar barulhento com muitas pessoas movimentadas</label>
+                            <label><input type="radio" name="q2" value="C"> C) Um lugar com música alta</label>
+                            <label><input type="radio" name="q2" value="D"> D) Um lugar vazio e deserto</label>
+                        </div>
+                    </div>
 
-            <div class="question-block">
-                <p>4. Qual som você ouviu como o MAIS ALTO/FORTE?</p>
-                <div class="options">
-                    <label><input type="radio" name="q4" value="a"> A) Multidão murmurando</label>
-                    <label><input type="radio" name="q4" value="b"> B) Passos de pessoas</label>
-                    <label><input type="radio" name="q4" value="c"> C) Avião decolando</label>
-                    <label><input type="radio" name="q4" value="d"> D) Vozes conversando</label>
-                </div>
-            </div>
+                    <!-- Questão 3 (Múltiplas Respostas) -->
+                    <div class="question-block">
+                        <h3>3. Quais sons você conseguiu IDENTIFICAR? (Marque todas as opções corretas)</h3>
+                        <div class="options">
+                            <label><input type="checkbox" name="q3" value="A"> A) Multidão murmurando</label>
+                            <label><input type="checkbox" name="q3" value="B"> B) Passos de pessoas</label>
+                            <label><input type="checkbox" name="q3" value="C"> C) Porta automática</label>
+                            <label><input type="checkbox" name="q3" value="D"> D) Avião decolando</label>
+                            <label><input type="checkbox" name="q3" value="E"> E) Vozes conversando</label>
+                            <label><input type="checkbox" name="q3" value="F"> F) Sino de elevador</label>
+                            <label><input type="checkbox" name="q3" value="G"> G) Música de fundo</label>
+                            <label><input type="checkbox" name="q3" value="H"> H) Alarme</label>
+                            <label><input type="checkbox" name="q3" value="I"> I) Roda de mala</label>
+                        </div>
+                    </div>
 
-            <div class="question-block">
-                <p>5. Qual som você ouviu como o MAIS BAIXO/SUAVE?</p>
-                <div class="options">
-                    <label><input type="radio" name="q5" value="a"> A) Avião decolando</label>
-                    <label><input type="radio" name="q5" value="b"> B) Multidão murmurando</label>
-                    <label><input type="radio" name="q5" value="c"> C) Porta automática</label>
-                    <label><input type="radio" name="q5" value="d"> D) Sino de elevador</label>
-                </div>
-            </div>
+                    <!-- Questão 4 -->
+                    <div class="question-block">
+                        <h3>4. Qual som você ouviu como o MAIS ALTO/FORTE?</h3>
+                        <div class="options">
+                            <label><input type="radio" name="q4" value="A"> A) Multidão murmurando</label>
+                            <label><input type="radio" name="q4" value="B"> B) Passos de pessoas</label>
+                            <label><input type="radio" name="q4" value="C"> C) Avião decolando</label>
+                            <label><input type="radio" name="q4" value="D"> D) Vozes conversando</label>
+                        </div>
+                    </div>
 
-            <div class="question-block">
-                <p>6. Por que você acha que o AVIÃO foi ouvido mais FORTE no FINAL do áudio?</p>
-                <div class="options">
-                    <label><input type="radio" name="q6" value="a"> A) Porque estava se afastando</label>
-                    <label><input type="radio" name="q6" value="b"> B) Porque estava se aproximando</label>
-                    <label><input type="radio" name="q6" value="c"> C) Porque era o único som importante</label>
-                    <label><input type="radio" name="q6" value="d"> D) Não há motivo específico</label>
-                </div>
-            </div>
+                    <!-- Questão 5 -->
+                    <div class="question-block">
+                        <h3>5. Qual som você ouviu como o MAIS BAIXO/SUAVE?</h3>
+                        <div class="options">
+                            <label><input type="radio" name="q5" value="A"> A) Avião decolando</label>
+                            <label><input type="radio" name="q5" value="B"> B) Multidão murmurando</label>
+                            <label><input type="radio" name="q5" value="C"> C) Porta automática</label>
+                            <label><input type="radio" name="q5" value="D"> D) Sino de elevador</label>
+                        </div>
+                    </div>
 
-            <div class="question-block">
-                <p>7. Se o áudio continuasse, qual som você SUPÕE que ouviria em seguida?</p>
-                <div class="options">
-                    <label><input type="radio" name="q7" value="a"> A) O avião pousando</label>
-                    <label><input type="radio" name="q7" value="b"> B) Pessoas descendo do avião</label>
-                    <label><input type="radio" name="q7" value="c"> C) Sons de bagagens sendo retiradas</label>
-                    <label><input type="radio" name="q7" value="d"> D) Todas as alternativas acima</label>
-                </div>
-            </div>
+                    <!-- Questão 6 -->
+                    <div class="question-block">
+                        <h3>6. Por que você acha que o AVIÃO foi ouvido mais FORTE no FINAL do áudio?</h3>
+                        <div class="options">
+                            <label><input type="radio" name="q6" value="A"> A) Porque estava se afastando</label>
+                            <label><input type="radio" name="q6" value="B"> B) Porque estava se aproximando</label>
+                            <label><input type="radio" name="q6" value="C"> C) Porque era o único som importante</label>
+                            <label><input type="radio" name="q6" value="D"> D) Não há motivo específico</label>
+                        </div>
+                    </div>
 
-            <button type="submit" class="submit-button">Enviar Respostas</button>
-        </form>
+                    <!-- Questão 7 -->
+                    <div class="question-block">
+                        <h3>7. Se o áudio continuasse, qual som você SUPÕE que ouviria em seguida?</h3>
+                        <div class="options">
+                            <label><input type="radio" name="q7" value="A"> A) O avião pousando</label>
+                            <label><input type="radio" name="q7" value="B"> B) Pessoas descendo do avião</label>
+                            <label><input type="radio" name="q7" value="C"> C) Sons de bagagens sendo retiradas</label>
+                            <label><input type="radio" name="q7" value="D"> D) Todas as alternativas acima</label>
+                        </div>
+                    </div>
 
-        <div id="successMessage">
-            Respostas enviadas com sucesso! Obrigado por participar da Jornada Sonora.
-        </div>
+                    <button type="submit" id="submitBtn">Enviar Respostas</button>
+                </form>
+
+                <div id="errorMessage" style="display: none;">Por favor, responda a todas as questões antes de enviar.</div>
+                <div id="successMessage" style="display: none;">Respostas enviadas com sucesso! Obrigado por participar da Jornada Sonora.</div>
+            </section>
+        </main>
     </div>
 
-    <footer>
-        &copy; 2024 Colégio Helyos. Todos os direitos reservados.
-    </footer>
-
     <script>
-        document.getElementById('quizForm').addEventListener('submit', function(event) {
+        // Referências aos elementos do áudio
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const durationSpan = document.getElementById('duration');
+        const volumeBar = document.getElementById('volumeBar');
+
+        // Referências aos elementos do formulário
+        const quizForm = document.getElementById('quizForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Respostas corretas (para validação interna, não exibida ao usuário)
+        const correctAnswers = {
+            q1: 'B',
+            q2: 'B',
+            q3: ['A', 'B', 'C', 'D', 'E', 'F', 'I'], // Múltiplas respostas
+            q4: 'C',
+            q5: 'B',
+            q6: 'B',
+            q7: 'D'
+        };
+
+        // --- Funções do Reprodutor de Áudio ---
+
+        function formatTime(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            durationSpan.textContent = formatTime(audioPlayer.duration);
+            progressBar.max = audioPlayer.duration;
+        });
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseBtn.classList.remove('play');
+                playPauseBtn.classList.add('pause');
+            } else {
+                audioPlayer.pause();
+                playPauseBtn.classList.remove('pause');
+                playPauseBtn.classList.add('play');
+            }
+        });
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            progressBar.value = audioPlayer.currentTime;
+            currentTimeSpan.textContent = formatTime(audioPlayer.currentTime);
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            playPauseBtn.classList.remove('pause');
+            playPauseBtn.classList.add('play');
+            audioPlayer.currentTime = 0; // Volta para o início
+            progressBar.value = 0;
+            currentTimeSpan.textContent = formatTime(0);
+        });
+
+        progressBar.addEventListener('input', () => {
+            audioPlayer.currentTime = progressBar.value;
+        });
+
+        volumeBar.addEventListener('input', () => {
+            audioPlayer.volume = volumeBar.value / 100;
+        });
+
+        // --- Funções do Formulário ---
+
+        // Verifica se o formulário já foi enviado (usando localStorage)
+        function checkSubmissionStatus() {
+            if (localStorage.getItem('jornadaSonoraSubmitted') === 'true') {
+                quizForm.style.display = 'none';
+                successMessage.style.display = 'block';
+                submitBtn.style.display = 'none';
+            }
+        }
+
+        // Valida se todas as questões foram respondidas
+        function validateForm() {
+            let allAnswered = true;
+            errorMessage.style.display = 'none'; // Esconde mensagem de erro anterior
+
+            // Valida questões de rádio (q1, q2, q4, q5, q6, q7)
+            const radioQuestions = ['q1', 'q2', 'q4', 'q5', 'q6', 'q7'];
+            radioQuestions.forEach(qName => {
+                const radios = document.querySelectorAll(`input[name="${qName}"]:checked`);
+                if (radios.length === 0) {
+                    allAnswered = false;
+                }
+            });
+
+            // Valida questão de checkbox (q3)
+            const q3Checkboxes = document.querySelectorAll('input[name="q3"]:checked');
+            if (q3Checkboxes.length === 0) {
+                allAnswered = false;
+            }
+
+            return allAnswered;
+        }
+
+        quizForm.addEventListener('submit', (event) => {
             event.preventDefault(); // Impede o envio padrão do formulário
 
-            // Aqui você pode adicionar lógica para coletar as respostas
-            // e enviá-las para um servidor, se necessário.
-            // Por enquanto, apenas exibiremos a mensagem de sucesso.
+            if (validateForm()) {
+                // Aqui você pode adicionar lógica para enviar as respostas para um servidor
+                // ou apenas exibir a mensagem de sucesso.
+                // Para este exercício, vamos apenas exibir a mensagem de sucesso e salvar no localStorage.
 
-            // Exemplo de como coletar uma resposta de rádio:
-            // const q1Answer = document.querySelector('input[name="q1"]:checked');
-            // if (q1Answer) {
-            //     console.log('Resposta Q1:', q1Answer.value);
-            // }
+                // Opcional: Coletar respostas para análise (não exibido ao usuário)
+                const userAnswers = {};
+                const formData = new FormData(quizForm);
+                for (let [name, value] of formData.entries()) {
+                    if (name.startsWith('q')) {
+                        if (name === 'q3') { // Para a questão de checkbox
+                            if (!userAnswers[name]) {
+                                userAnswers[name] = [];
+                            }
+                            userAnswers[name].push(value);
+                        } else {
+                            userAnswers[name] = value;
+                        }
+                    }
+                }
+                // console.log("Respostas do usuário:", userAnswers);
+                // console.log("Respostas corretas:", correctAnswers);
 
-            // Exemplo de como coletar respostas de checkbox:
-            // const q3Answers = document.querySelectorAll('input[name="q3"]:checked');
-            // const q3Values = Array.from(q3Answers).map(cb => cb.value);
-            // console.log('Respostas Q3:', q3Values);
+                quizForm.style.display = 'none';
+                submitBtn.style.display = 'none';
+                successMessage.style.display = 'block';
+                localStorage.setItem('jornadaSonoraSubmitted', 'true'); // Marca como enviado
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
 
-            document.getElementById('quizForm').style.display = 'none'; // Esconde o formulário
-            document.getElementById('successMessage').style.display = 'block'; // Mostra a mensagem de sucesso
-            window.scrollTo(0, 0); // Rola para o topo da página para ver a mensagem
+        // Inicializa o estado do formulário ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            checkSubmissionStatus();
+            // Garante que o volume inicial seja o do slider
+            audioPlayer.volume = volumeBar.value / 100;
         });
     </script>
 </body>
