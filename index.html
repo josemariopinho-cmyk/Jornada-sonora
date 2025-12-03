@@ -1,14 +1,499 @@
-/* Espaçamento reduzido entre linhas */
-line-height: 1.4; (antes era 1.6)
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imersão Aeroporto - Colégio Helyos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #c41e3a;
+            --light-gray: #f4f4f4;
+            --dark-gray: #333;
+        }
 
-/* Título centralizado */
-text-align: center;
-font-size: 24px;
-font-weight: bold;
-color: #c41e3a; (vermelho Helyos)
-margin: 15px 0; (reduzido)
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4; /* Espaçamento reduzido entre linhas */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
 
-/* Texto das instruções */
-margin: 10px 0; (reduzido)
-padding: 10px; (reduzido)
-line-height: 1.4;
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            max-width: 200px;
+            display: block;
+            margin: 0 auto 30px auto;
+            height: auto;
+        }
+
+        .main-title {
+            text-align: center;
+            color: var(--primary-red);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .instructions p {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .audio-player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 15px;
+        }
+
+        #playPauseBtn {
+            background-color: var(--primary-red);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        #playPauseBtn:hover {
+            background-color: #a01a2e;
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            height: 8px;
+            background-color: #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-red);
+            border-radius: 4px;
+        }
+
+        #currentTime, #duration {
+            font-size: 14px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        #volumeControl {
+            width: 80px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: #ddd;
+            outline: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #volumeControl::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #volumeControl::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .quiz-section {
+            margin-top: 30px;
+        }
+
+        .question-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+
+        .question-text {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 17px;
+            color: var(--dark-gray);
+        }
+
+        .question-section label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .question-section input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.1);
+            vertical-align: middle;
+        }
+
+        #submitQuiz {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto 20px auto;
+            padding: 15px 20px;
+            background-color: var(--primary-red);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #submitQuiz:hover {
+            background-color: #a01a2e;
+            transform: translateY(-2px);
+        }
+
+        #submitQuiz:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .results-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-gray);
+            display: none; /* Hidden by default */
+        }
+
+        .results-section p {
+            margin: 10px 0;
+        }
+
+        .results-section #score, .results-section #percentage {
+            color: var(--primary-red);
+            font-size: 20px;
+        }
+
+        #message {
+            font-size: 16px;
+            font-weight: 400;
+            margin-top: 15px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px;
+            }
+            .logo {
+                max-width: 150px;
+                margin-bottom: 20px;
+            }
+            .main-title {
+                font-size: 22px;
+            }
+            .instructions p {
+                font-size: 14px;
+            }
+            #playPauseBtn {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            .controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .progress-container {
+                width: calc(100% - 100px); /* Adjust width for smaller screens */
+            }
+            #volumeControl {
+                width: 60px;
+            }
+            #submitQuiz {
+                font-size: 16px;
+                padding: 12px 15px;
+            }
+            .results-section {
+                font-size: 16px;
+            }
+            .results-section #score, .results-section #percentage {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="LOGOMARCA HELYOS.png" alt="Logo Helyos" class="logo">
+        </header>
+
+        <main>
+            <div class="instructions">
+                <h1 class="main-title">Bem-vindo à Imersão Aeroporto 🎧</h1>
+                <p>
+                    Coloque seus fones de ouvido, certifique-se que o volume está adequado e escolha um local tranquilo.
+                    Clique no botão ▶️ para iniciar o áudio. Escute com atenção do início ao fim.
+                    Você pode pausar e voltar sempre que necessário. Preste bastante atenção.
+                </p>
+                <p>
+                    Após escutar o áudio, leia cada questão com cuidado e escolha apenas UMA alternativa por questão.
+                    Após concluir envie suas respostas, clicando no botão abaixo.
+                </p>
+            </div>
+
+            <div class="audio-player">
+                <audio id="audioSource" src="Audiobook_v final.mp3"></audio>
+                <div class="controls">
+                    <button id="playPauseBtn">▶️</button>
+                    <div class="progress-container" id="progressContainer">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                    <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                    <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1">
+                </div>
+            </div>
+
+            <form id="quizForm" class="quiz-section">
+                <div class="question-section">
+                    <p class="question-text">1. Qual é a principal característica de um aeroporto internacional?</p>
+                    <label><input type="radio" name="q1" value="a"> Possui apenas voos domésticos.</label>
+                    <label><input type="radio" name="q1" value="b"> Oferece voos para outros países.</label>
+                    <label><input type="radio" name="q1" value="c"> Não tem controle de passaporte.</label>
+                    <label><input type="radio" name="q1" value="d"> É exclusivo para cargas.</label>
+                </div>
+
+                <div class="question-section">
+                    <p class="question-text">2. O que é necessário para embarcar em um voo internacional?</p>
+                    <label><input type="radio" name="q2" value="a"> Apenas a passagem aérea.</label>
+                    <label><input type="radio" name="q2" value="b"> Passaporte e visto (se necessário).</label>
+                    <label><input type="radio" name="q2" value="c"> Carteira de motorista.</label>
+                    <label><input type="radio" name="q2" value="d"> Cartão de crédito.</label>
+                </div>
+
+                <div class="question-section">
+                    <p class="question-text">3. Qual é o tempo recomendado para chegar antes de um voo?</p>
+                    <label><input type="radio" name="q3" value="a"> 30 minutos antes.</label>
+                    <label><input type="radio" name="q3" value="b"> 1 hora antes para voos domésticos, 2-3 horas para internacionais.</label>
+                    <label><input type="radio" name="q3" value="c"> 15 minutos antes.</label>
+                    <label><input type="radio" name="q3" value="d"> Não há tempo recomendado.</label>
+                </div>
+
+                <div class="question-section">
+                    <p class="question-text">4. Qual é a função de um agente de check-in?</p>
+                    <label><input type="radio" name="q4" value="a"> Vender passagens aéreas.</label>
+                    <label><input type="radio" name="q4" value="b"> Verificar documentos, despachar bagagem e emitir cartão de embarque.</label>
+                    <label><input type="radio" name="q4" value="c"> Controlar o tráfego aéreo.</label>
+                    <label><input type="radio" name="q4" value="d"> Limpar a aeronave.</label>
+                </div>
+
+                <div class="question-section">
+                    <p class="question-text">5. O que significa a sigla IATA?</p>
+                    <label><input type="radio" name="q5" value="a"> International Air Transport Association.</label>
+                    <label><input type="radio" name="q5" value="b"> International Airport Traffic Authority.</label>
+                    <label><input type="radio" name="q5" value="c"> Internal Air Travel Agency.</label>
+                    <label><input type="radio" name="q5" value="d"> Institute of Aviation Technology.</label>
+                </div>
+
+                <div class="question-section">
+                    <p class="question-text">6. Qual é o procedimento de segurança mais importante no aeroporto?</p>
+                    <label><input type="radio" name="q6" value="a"> Comprar produtos no free shop.</label>
+                    <label><input type="radio" name="q6" value="b"> Passar pelo raio-X e detector de metais.</label>
+                    <label><input type="radio" name="q6" value="c"> Fazer o check-in online.</label>
+                    <label><input type="radio" name="q6" value="d"> Escolher o assento na janela.</label>
+                </div>
+
+                <div class="question-section">
+                    <p class="question-text">7. Qual é a diferença entre um voo doméstico e internacional?</p>
+                    <label><input type="radio" name="q7" value="a"> Voos domésticos são mais caros.</label>
+                    <label><input type="radio" name="q7" value="b"> Voos domésticos são dentro do mesmo país, internacionais entre países.</label>
+                    <label><input type="radio" name="q7" value="c"> Voos internacionais não exigem documentos.</label>
+                    <label><input type="radio" name="q7" value="d"> Não há diferença.</label>
+                </div>
+
+                <button type="submit" id="submitQuiz">Enviar Respostas</button>
+            </form>
+
+            <div id="results" class="results-section">
+                <p>Seu resultado: <span id="score"></span> / 7 (<span id="percentage"></span>%)</p>
+                <p id="message"></p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audioSource');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const durationSpan = document.getElementById('duration');
+        const volumeControl = document.getElementById('volumeControl');
+
+        const quizForm = document.getElementById('quizForm');
+        const resultsSection = document.getElementById('results');
+        const scoreSpan = document.getElementById('score');
+        const percentageSpan = document.getElementById('percentage');
+        const messageP = document.getElementById('message');
+        const submitQuizBtn = document.getElementById('submitQuiz');
+
+        const correctAnswers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'b',
+            q4: 'b',
+            q5: 'a',
+            q6: 'b',
+            q7: 'b'
+        };
+
+        // --- Audio Player Logic ---
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            durationSpan.textContent = formatTime(audio.duration);
+            progressBar.style.width = '0%';
+        });
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.textContent = '⏸️';
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = '▶️';
+            }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+            currentTimeSpan.textContent = formatTime(audio.currentTime);
+        });
+
+        audio.addEventListener('ended', () => {
+            playPauseBtn.textContent = '▶️';
+            audio.currentTime = 0; // Reset audio to start
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            const clickX = e.offsetX;
+            const width = progressContainer.offsetWidth;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        volumeControl.addEventListener('input', () => {
+            audio.volume = volumeControl.value;
+        });
+
+        // --- Quiz Logic ---
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            let score = 0;
+            let allAnswered = true;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+
+                if (!selectedOption) {
+                    allAnswered = false;
+                    break;
+                }
+
+                if (selectedOption.value === correctAnswers[questionName]) {
+                    score++;
+                }
+            }
+
+            if (!allAnswered) {
+                alert('Por favor, responda a todas as questões antes de enviar.');
+                return;
+            }
+
+            const percentage = (score / totalQuestions) * 100;
+            scoreSpan.textContent = score;
+            percentageSpan.textContent = percentage.toFixed(0);
+
+            if (percentage >= 70) { // Exemplo de critério de sucesso
+                messageP.textContent = 'Parabéns! Você demonstrou excelente compreensão!';
+                messageP.style.color = 'green';
+            } else {
+                messageP.textContent = 'Você pode revisar o áudio e tentar novamente para melhorar seu resultado.';
+                messageP.style.color = var(--primary-red);
+            }
+
+            resultsSection.style.display = 'block';
+            submitQuizBtn.disabled = true; // Desabilita o botão após a primeira tentativa
+            
+            // Opcional: Scroll para os resultados
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
+</body>
+</html>
