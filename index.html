@@ -3,254 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imersão Aeroporto - Colégio Helyos</title>
+    <title>Imersão Aeroporto</title>
     <style>
-        /* Variáveis de cor */
-        :root {
-            --primary-red: #c41e3a;
-            --light-gray: #f4f4f4;
-            --dark-gray: #333;
-            --text-color: #555;
-        }
-
+        /* Estilos Gerais */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--light-gray);
-            color: var(--text-color);
-            line-height: 1.4; /* Espaçamento reduzido entre linhas */
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.4; /* Espaçamento reduzido */
         }
 
         .container {
             max-width: 800px;
             margin: 20px auto;
-            padding: 25px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Logo */
-        .logo {
-            display: block;
-            max-width: 200px;
-            margin: 0 auto 30px auto;
-            height: auto;
-        }
-
-        /* Título e Instruções */
-        .instructions-section {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .instructions-section h1 {
-            color: var(--primary-red);
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .instructions-section p {
-            font-size: 1.1em;
-            color: var(--dark-gray);
-            margin: 0 auto;
-            max-width: 700px;
-            text-align: justify;
-            line-height: 1.6; /* Manter um pouco mais de espaçamento para o parágrafo principal */
-        }
-
-        /* Audio Player */
-        .audio-player-container {
-            background-color: #f9f9f9;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .audio-controls {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            gap: 15px;
-        }
-
-        .play-pause-btn {
-            background-color: var(--primary-red);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .play-pause-btn:hover {
-            background-color: #a0182e;
-        }
-
-        .progress-container {
-            flex-grow: 1;
-            height: 8px;
-            background-color: #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background-color: var(--primary-red);
-            border-radius: 4px;
-        }
-
-        .time-display {
-            font-size: 0.9em;
-            color: var(--dark-gray);
-            width: 90px; /* Fixed width to prevent jumping */
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .volume-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            width: 120px;
-            flex-shrink: 0;
-        }
-
-        .volume-container span {
-            font-size: 1.2em;
-            color: var(--dark-gray);
-        }
-
-        .volume-slider {
-            width: 100%;
-            height: 4px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: #ddd;
-            outline: none;
-            border-radius: 2px;
-            cursor: pointer;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 14px;
-            height: 14px;
-            background: var(--primary-red);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .volume-slider::-moz-range-thumb {
-            width: 14px;
-            height: 14px;
-            background: var(--primary-red);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        /* Quiz Questions */
-        .quiz-section h2 {
-            color: var(--primary-red);
-            font-size: 1.8em;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .question {
-            background-color: #fefefe;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
-        .question p {
-            font-size: 1.1em;
-            font-weight: 600;
+        /* Cabeçalho e Logo */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            max-width: 180px; /* Tamanho da logo */
+            height: auto;
             margin-bottom: 15px;
-            color: var(--dark-gray);
+        }
+
+        h1 {
+            text-align: center;
+            color: #c41e3a; /* Vermelho temático */
+            font-size: 28px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        /* Instruções */
+        .instructions {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 5px solid #c41e3a; /* Detalhe vermelho */
+            line-height: 1.4; /* Espaçamento reduzido */
+            font-size: 16px;
+            text-align: justify;
+        }
+
+        /* Reprodutor de Áudio */
+        audio {
+            width: 100%;
+            margin: 25px 0;
+            display: block;
+        }
+
+        /* Seção de Questões */
+        .question-block {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .question-block h3 {
+            color: #c41e3a; /* Vermelho temático */
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
         }
 
         .options label {
             display: block;
             margin-bottom: 10px;
             cursor: pointer;
-            font-size: 1em;
-            color: var(--text-color);
-            padding: 8px 0;
-            transition: color 0.2s ease;
-        }
-
-        .options label:hover {
-            color: var(--primary-red);
+            font-size: 16px;
         }
 
         .options input[type="radio"] {
             margin-right: 10px;
-            accent-color: var(--primary-red); /* Cor do radio button */
             transform: scale(1.2); /* Aumenta o tamanho do radio button */
         }
 
-        .submit-btn {
+        /* Botão Enviar */
+        button {
             display: block;
             width: 100%;
-            padding: 15px 20px;
-            background-color: var(--primary-red);
-            color: #fff;
+            padding: 15px;
+            background-color: #c41e3a; /* Vermelho temático */
+            color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            font-weight: 600;
+            border-radius: 5px;
+            font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease;
             margin-top: 30px;
         }
 
-        .submit-btn:hover {
-            background-color: #a0182e;
-            transform: translateY(-2px);
+        button:hover {
+            background-color: #a01a2e; /* Tom mais escuro no hover */
         }
 
-        .results {
+        /* Placar de Acertos */
+        #score-display {
             margin-top: 30px;
             padding: 20px;
-            background-color: #e6ffe6; /* Light green for success */
-            border: 1px solid #aaffaa;
-            border-radius: 8px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
             text-align: center;
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #28a745; /* Dark green */
-            display: none; /* Hidden by default */
-        }
-
-        .results.error {
-            background-color: #ffe6e6; /* Light red for error */
-            border: 1px solid #ffaaaa;
-            color: #dc3545; /* Dark red */
+            color: #c41e3a; /* Vermelho temático */
+            display: none; /* Escondido por padrão */
         }
 
         /* Responsividade */
@@ -259,294 +129,147 @@
                 margin: 10px;
                 padding: 15px;
             }
-            .instructions-section h1 {
-                font-size: 1.8em;
+            h1 {
+                font-size: 24px;
             }
-            .instructions-section p {
-                font-size: 1em;
-            }
-            .audio-controls {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .play-pause-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 1.3em;
-            }
-            .time-display, .volume-container {
-                width: auto;
-                flex-basis: 45%; /* Distribute space */
-                text-align: center;
-            }
-            .progress-container {
-                order: 1; /* Place progress bar below buttons/time/volume */
-                width: 100%;
-                margin-top: 10px;
-            }
-            .volume-container {
-                order: 3;
-            }
-            .time-display {
-                order: 2;
-            }
-            .quiz-section h2 {
-                font-size: 1.5em;
-            }
-            .question p {
-                font-size: 1em;
-            }
-            .options label {
-                font-size: 0.95em;
-            }
-            .submit-btn {
-                font-size: 1.1em;
-                padding: 12px 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                max-width: 150px;
-            }
-            .instructions-section h1 {
-                font-size: 1.5em;
-            }
-            .instructions-section p {
-                font-size: 0.9em;
-            }
-            .play-pause-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2em;
-            }
-            .time-display, .volume-container {
-                font-size: 0.85em;
+            .instructions, .question-block h3, .options label, button {
+                font-size: 15px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="LOGOMARCA HELYOS.png" alt="Logo Colégio Helyos" class="logo">
-
-        <div class="instructions-section">
+        <header>
+            <img src="LOGOMARCA HELYOS.png" alt="Logomarca Helyos">
             <h1>Bem-vindo à Imersão Aeroporto 🎧</h1>
-            <p>
-                Coloque seus fones de ouvido, certifique-se que o volume está adequado e escolha um local tranquilo. 
-                Clique no botão ▶️ para iniciar o áudio. Escute com atenção do início ao fim. Você pode pausar e 
-                voltar sempre que necessário. Preste bastante atenção. Após escutar o áudio, leia cada questão 
-                com cuidado e escolha apenas UMA alternativa por questão. Após concluir envie suas respostas, 
-                clicando no botão abaixo.
-            </p>
+        </header>
+
+        <div class="instructions">
+            <p>Coloque seus fones de ouvido, certifique-se que o volume está adequado e escolha um local tranquilo. Clique no botão ▶️ para iniciar o áudio. Escute com atenção do início ao fim. Você pode pausar e voltar sempre que necessário. Preste bastante atenção. Após escutar o áudio, leia cada questão com cuidado e escolha apenas UMA alternativa por questão. Após concluir envie suas respostas, clicando no botão abaixo.</p>
         </div>
 
-        <div class="audio-player-container">
-            <audio id="audioPlayer" src="Audiobook_v final.mp3"></audio>
-            <div class="audio-controls">
-                <button id="playPauseBtn" class="play-pause-btn">▶️</button>
-                <div id="progressContainer" class="progress-container">
-                    <div id="progressBar" class="progress-bar"></div>
-                </div>
-                <div id="timeDisplay" class="time-display">0:00 / 0:00</div>
-                <div class="volume-container">
-                    <span>🔊</span>
-                    <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01" value="1">
+        <audio controls src="Audiobook_v final.mp3">
+            Seu navegador não suporta o elemento de áudio.
+        </audio>
+
+        <form id="quiz-form">
+            <div class="question-block">
+                <h3>1. O que o áudio apresenta como tema principal?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="a"> A) A rotina de um aeroporto e seus desafios.</label>
+                    <label><input type="radio" name="q1" value="b"> B) A história da aviação comercial no Brasil.</label>
+                    <label><input type="radio" name="q1" value="c"> C) Os diferentes tipos de aeronaves modernas.</label>
+                    <label><input type="radio" name="q1" value="d"> D) O processo de construção de uma pista de pouso.</label>
                 </div>
             </div>
-        </div>
 
-        <div class="quiz-section">
-            <h2>Questões:</h2>
-            <form id="quizForm">
-                <div class="question">
-                    <p>1. Qual é o principal objetivo de um aeroporto?</p>
-                    <div class="options">
-                        <label><input type="radio" name="q1" value="a"> Armazenar bagagens</label>
-                        <label><input type="radio" name="q1" value="b"> Facilitar o transporte aéreo de passageiros e carga</label>
-                        <label><input type="radio" name="q1" value="c"> Abrigar oficinas de reparo</label>
-                        <label><input type="radio" name="q1" value="d"> Servir como museu</label>
-                    </div>
+            <div class="question-block">
+                <h3>2. Qual é o propósito da atividade descrita?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="a"> A) Avaliar a capacidade de memorização de dados.</label>
+                    <label><input type="radio" name="q2" value="b"> B) Desenvolver a compreensão auditiva e interpretação.</label>
+                    <label><input type="radio" name="q2" value="c"> C) Ensinar a pilotar um avião de pequeno porte.</label>
+                    <label><input type="radio" name="q2" value="d"> D) Promover a interação social entre os participantes.</label>
                 </div>
+            </div>
 
-                <div class="question">
-                    <p>2. O que são pistas de pouso?</p>
-                    <div class="options">
-                        <label><input type="radio" name="q2" value="a"> Áreas para estacionamento de aviões</label>
-                        <label><input type="radio" name="q2" value="b"> Vias especiais para decolagem e pouso de aviões</label>
-                        <label><input type="radio" name="q2" value="c"> Locais de manutenção de aviões</label>
-                        <label><input type="radio" name="q2" value="d"> Zonas de descanso para pilotos</label>
-                    </div>
+            <div class="question-block">
+                <h3>3. Qual informação foi destacada no início?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="a"> A) A importância da pontualidade nos voos.</label>
+                    <label><input type="radio" name="q3" value="b"> B) A necessidade de documentação para embarque.</label>
+                    <label><input type="radio" name="q3" value="c"> C) A recomendação do uso de fones de ouvido.</label>
+                    <label><input type="radio" name="q3" value="d"> D) O número de passageiros que passam pelo aeroporto.</label>
                 </div>
+            </div>
 
-                <div class="question">
-                    <p>3. Qual profissional é responsável por orientar aviões em pista?</p>
-                    <div class="options">
-                        <label><input type="radio" name="q3" value="a"> Comissário de bordo</label>
-                        <label><input type="radio" name="q3" value="b"> Controlador de tráfego aéreo</label>
-                        <label><input type="radio" name="q3" value="c"> Mecânico de aviação</label>
-                        <label><input type="radio" name="q3" value="d"> Gerente de terminal</label>
-                    </div>
+            <div class="question-block">
+                <h3>4. Qual é a importância mencionada no áudio?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="a"> A) A importância de viajar para outros países.</label>
+                    <label><input type="radio" name="q4" value="b"> B) A importância de conhecer a equipe de bordo.</label>
+                    <label><input type="radio" name="q4" value="c"> C) A importância de seguir as instruções de segurança.</label>
+                    <label><input type="radio" name="q4" value="d"> D) A importância de prestar atenção aos detalhes sonoros.</label>
                 </div>
+            </div>
 
-                <div class="question">
-                    <p>4. Qual é a importância da segurança em um aeroporto?</p>
-                    <div class="options">
-                        <label><input type="radio" name="q4" value="a"> Aumentar o lucro</label>
-                        <label><input type="radio" name="q4" value="b"> Proteger passageiros, funcionários e a infraestrutura</label>
-                        <label><input type="radio" name="q4" value="c"> Reduzir custos operacionais</label>
-                        <label><input type="radio" name="q4" value="d"> Agilizar os processos</label>
-                    </div>
+            <div class="question-block">
+                <h3>5. O que o áudio sugere como ação final?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="a"> A) Enviar as respostas após concluir o questionário.</label>
+                    <label><input type="radio" name="q5" value="b"> B) Compartilhar a experiência nas redes sociais.</label>
+                    <label><input type="radio" name="q5" value="c"> C) Pesquisar mais sobre a aviação civil.</label>
+                    <label><input type="radio" name="q5" value="d"> D) Reservar uma passagem para o próximo voo.</label>
                 </div>
+            </div>
 
-                <div class="question">
-                    <p>5. O que é Terminal de Passageiros?</p>
-                    <div class="options">
-                        <label><input type="radio" name="q5" value="a"> Um local para reparar aviões</label>
-                        <label><input type="radio" name="q5" value="b"> Estrutura onde passageiros embarcam e desembarcam</label>
-                        <label><input type="radio" name="q5" value="c"> Uma sala para pilotos descansarem</label>
-                        <label><input type="radio" name="q5" value="d"> Um depósito de combustível</label>
-                    </div>
+            <div class="question-block">
+                <h3>6. Qual elemento foi enfatizado durante o texto?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="a"> A) A velocidade dos aviões.</label>
+                    <label><input type="radio" name="q6" value="b"> B) A atenção aos sons e detalhes.</label>
+                    <label><input type="radio" name="q6" value="c"> C) O conforto das poltronas.</label>
+                    <label><input type="radio" name="q6" value="d"> D) A variedade de lojas no aeroporto.</label>
                 </div>
+            </div>
 
-                <div class="question">
-                    <p>6. Quais são as principais áreas de um aeroporto?</p>
-                    <div class="options">
-                        <label><input type="radio" name="q6" value="a"> Apenas pistas de pouso</label>
-                        <label><input type="radio" name="q6" value="b"> Terminal, pistas, hangares e torres de controle</label>
-                        <label><input type="radio" name="q6" value="c"> Somente prédios administrativos</label>
-                        <label><input type="radio" name="q6" value="d"> Áreas residenciais</label>
-                    </div>
+            <div class="question-block">
+                <h3>7. Qual é a conclusão apresentada no áudio?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="a"> A) A viagem de avião é sempre cansativa.</label>
+                    <label><input type="radio" name="q7" value="b"> B) O aeroporto é um lugar de pouca atividade.</label>
+                    <label><input type="radio" name="q7" value="c"> C) A imersão auditiva é uma ferramenta de aprendizado.</label>
+                    <label><input type="radio" name="q7" value="d"> D) Todos os aeroportos são iguais em sua estrutura.</label>
                 </div>
+            </div>
 
-                <div class="question">
-                    <p>7. Como os aeroportos contribuem para a economia?</p>
-                    <div class="options">
-                        <label><input type="radio" name="q7" value="a"> Prejudicando o turismo</label>
-                        <label><input type="radio" name="q7" value="b"> Gerando empregos e facilitando o turismo e comércio</label>
-                        <label><input type="radio" name="q7" value="c"> Apenas fornecendo serviços locais</label>
-                        <label><input type="radio" name="q7" value="d"> Reduzindo a mobilidade</label>
-                    </div>
-                </div>
+            <button type="submit">Enviar Respostas</button>
+        </form>
 
-                <button type="submit" class="submit-btn">Enviar Respostas</button>
-            </form>
-            <div id="results" class="results"></div>
-        </div>
+        <div id="score-display"></div>
     </div>
 
     <script>
-        // Audio Player Logic
-        const audioPlayer = document.getElementById('audioPlayer');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const progressBar = document.getElementById('progressBar');
-        const progressContainer = document.getElementById('progressContainer');
-        const timeDisplay = document.getElementById('timeDisplay');
-        const volumeSlider = document.getElementById('volumeSlider');
+        const quizForm = document.getElementById('quiz-form');
+        const scoreDisplay = document.getElementById('score-display');
 
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-
-        playPauseBtn.addEventListener('click', () => {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-                playPauseBtn.textContent = '⏸️';
-            } else {
-                audioPlayer.pause();
-                playPauseBtn.textContent = '▶️';
-            }
-        });
-
-        audioPlayer.addEventListener('timeupdate', () => {
-            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-            progressBar.style.width = `${progress}%`;
-            timeDisplay.textContent = `${formatTime(audioPlayer.currentTime)} / ${formatTime(audioPlayer.duration)}`;
-        });
-
-        audioPlayer.addEventListener('loadedmetadata', () => {
-            timeDisplay.textContent = `0:00 / ${formatTime(audioPlayer.duration)}`;
-        });
-
-        progressContainer.addEventListener('click', (e) => {
-            const clickX = e.offsetX;
-            const width = progressContainer.offsetWidth;
-            audioPlayer.currentTime = (clickX / width) * audioPlayer.duration;
-        });
-
-        volumeSlider.addEventListener('input', () => {
-            audioPlayer.volume = volumeSlider.value;
-        });
-
-        audioPlayer.addEventListener('ended', () => {
-            playPauseBtn.textContent = '▶️';
-            audioPlayer.currentTime = 0; // Reset to start
-        });
-
-        // Quiz Logic
-        const quizForm = document.getElementById('quizForm');
-        const resultsDiv = document.getElementById('results');
-
+        // Definir as respostas corretas
         const correctAnswers = {
-            q1: 'b',
-            q2: 'b',
-            q3: 'b',
-            q4: 'b',
-            q5: 'b',
-            q6: 'b',
-            q7: 'b'
+            q1: 'a', // Exemplo: A rotina de um aeroporto e seus desafios.
+            q2: 'b', // Exemplo: Desenvolver a compreensão auditiva e interpretação.
+            q3: 'c', // Exemplo: A recomendação do uso de fones de ouvido.
+            q4: 'd', // Exemplo: A importância de prestar atenção aos detalhes sonoros.
+            q5: 'a', // Exemplo: Enviar as respostas após concluir o questionário.
+            q6: 'b', // Exemplo: A atenção aos sons e detalhes.
+            q7: 'c'  // Exemplo: A imersão auditiva é uma ferramenta de aprendizado.
         };
 
-        quizForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
+        quizForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
 
             let score = 0;
-            let allAnswered = true;
-            const formData = new FormData(quizForm);
-
-            // Check if all questions are answered
-            const questionNames = Object.keys(correctAnswers);
-            for (const qName of questionNames) {
-                if (!formData.has(qName)) {
-                    allAnswered = false;
-                    break;
-                }
-            }
-
-            if (!allAnswered) {
-                resultsDiv.classList.remove('results');
-                resultsDiv.classList.add('results', 'error');
-                resultsDiv.textContent = 'Por favor, responda a todas as questões antes de enviar.';
-                resultsDiv.style.display = 'block';
-                return;
-            }
-
-            // Calculate score
-            for (const [question, userAnswer] of formData.entries()) {
-                if (correctAnswers[question] === userAnswer) {
-                    score++;
-                }
-            }
-
             const totalQuestions = Object.keys(correctAnswers).length;
-            const percentage = (score / totalQuestions) * 100;
 
-            let message = `Você acertou ${score} de ${totalQuestions} questões (${percentage.toFixed(0)}%).`;
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
 
-            if (percentage >= 70) {
-                message += ' Parabéns! Excelente desempenho!';
-                resultsDiv.classList.remove('error');
-                resultsDiv.classList.add('results');
-            } else {
-                message += ' Continue estudando para melhorar!';
-                resultsDiv.classList.remove('results');
-                resultsDiv.classList.add('results', 'error');
+                if (selectedOption) {
+                    if (selectedOption.value === correctAnswers[questionName]) {
+                        score++;
+                    }
+                }
             }
 
-            resultsDiv.textContent = message;
-            resultsDiv.style.display = 'block';
+            scoreDisplay.innerHTML = `Você acertou ${score} de ${totalQuestions} questões!`;
+            scoreDisplay.style.display = 'block'; // Mostra o placar
+            
+            // Opcional: Desabilitar o formulário após o envio
+            const formElements = quizForm.elements;
+            for (let i = 0; i < formElements.length; i++) {
+                formElements[i].disabled = true;
+            }
         });
     </script>
 </body>
